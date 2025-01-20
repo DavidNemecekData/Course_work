@@ -1,0 +1,55 @@
+# What is the size of each order (by size, we mean the number of pieces of all products in that order)?
+SELECT ordernumber, SUM(quantityordered) AS totalquantity
+FROM orderdetails
+GROUP BY orderNumber
+	
+# What is the total amount of each order?
+SELECT ordernumber, SUM(quantityordered * priceeach) AS totalamount
+FROM orderdetails
+GROUP BY ordernumber
+	
+# How many products are there for each product line?
+SELECT productline, COUNT(*)
+FROM products
+GROUP BY productline
+
+	
+# What is the average suggested retail price (MSRP) for each product line?
+SELECT productline, AVG(msrp)
+FROM products
+GROUP BY productline
+	
+# How many customers are from each country?
+SELECT country, count(customername)
+FROM customers
+GROUP BY country
+	
+# What is the smallest and largest credit limit for a company per country?
+SELECT customername, country, MIN(customers.creditlimit), MAX(customers.creditlimit)
+FROM customers
+GROUP BY country, customername ORDER BY customername
+
+# What is the total amount of orders for each of the product lines (sum(quantityordered * priceEach))?
+SELECT productlines.productLine, sum(quantityordered * priceEach) from productlines
+JOIN products ON products.productline = productlines.productline
+JOIN orderdetails ON orderdetails.productcode = products.productcode
+GROUP BY productlines.productline
+
+# What is the total of payments made by each company (the query should also return the name of that company)?
+SELECT customername, sum(amount) FROM customers
+JOIN payments ON customers.customernumber = payments.customernumber
+GROUP BY customername
+ORDER BY SUM(amount) DESC
+
+# How many total items did each company order?
+SELECT customername, sum(orderdetails.quantityordered) FROM customers
+JOIN orders ON orders.customernumber = customers.customernumber
+JOIN orderdetails ON orderdetails.ordernumber = orders.ordernumber
+GROUP BY customername
+ORDER BY SUM(orderdetails.quantityordered) DESC
+
+# Multiple grouping
+SELECT officeCode, jobTitle, COUNT(*) AS employee_count
+FROM employees
+GROUP BY officeCode, jobTitle
+ORDER BY officeCode, jobTitle;

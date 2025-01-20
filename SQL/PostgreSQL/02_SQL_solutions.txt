@@ -1,0 +1,30 @@
+# exercise 1 - products
+SELECT *
+FROM products
+JOIN productlines ON products.productline = productlines.productline
+
+#exercise 2 - customers and empoloyees
+
+SELECT *
+FROM customers
+JOIN employees ON employeenumber = salesrepemployeenumber
+
+SELECT *
+FROM customers
+LEFT JOIN employees ON employeenumber = salesrepemployeenumber
+
+SELECT *
+FROM customers
+RIGHT JOIN employees ON employeenumber = salesrepemployeenumber
+
+# exercise_3
+SELECT orders.ordernumber, orders.status, orderdetails.productcode, orderdetails.quantityordered, products.productname
+FROM orders
+JOIN orderdetails ON orders.ordernumber = orderdetails.ordernumber
+JOIN products ON orderdetails.productcode = products.productcode
+
+order id (orders table),
+order status (orders table),
+code of the ordered product (orderdetails table),
+number of items of the ordered product (orderdetails table),
+name of the ordered product (products table).

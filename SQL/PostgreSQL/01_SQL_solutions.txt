@@ -1,0 +1,76 @@
+# loading_data_1
+SELECT *
+FROM products
+WHERE productline = 'Motorcycles';
+
+# loading_data_2 - Display all products with warehouse stock above 1000 and the cost below 20USD.
+SELECT *
+FROM products
+WHERE quantityinstock > 1000 AND buyprice < 20
+
+# loadingdata_3 - Display all orders (orders table) made in 2003 and cancelled.
+SELECT *
+FROM orders
+WHERE orderdate >= '2003-01-01' AND orderdate < '2004-01-01'
+
+#loading_data_4
+SELECT *
+FROM orders
+WHERE orderdate >= '2003-01-01' AND orderdate < '2004-01-01' AND status = 'Cancelled'
+
+# replacing_data_1 - Change the location of an employee: Bott Larry from the office with id 7 to the one with id 5.
+UPDATE employees
+SET officecode = 5
+WHERE lastname = 'Bott' AND firstname = 'Larry'
+SELECT *
+FROM employees
+WHERE lastname = 'Bott'
+
+# replacing_data_ 2 - They will change the credit limit for the company 'Tekni Collectables Inc.' to 60,000.
+UPDATE customers
+SET creditlimit = 60000
+WHERE customername = 'Tekni Collectables Inc.'
+SELECT *
+FROM customers
+WHERE customername = 'Tekni Collectables Inc.'
+
+# replacing_data_3 - Change the number of available items of all products from the Trucks and Buses product line to 0.
+UPDATE products
+SET quantityinstock = 0
+WHERE productline = 'Trucks and Buses'
+SELECT *
+FROM products
+WHERE productline = 'Trucks and Buses'
+
+# replacing_data_4 - Change the number of ordered items with code S18_2957 in order number 10103 to 60.
+UPDATE orderdetails
+SET quantityordered = 60
+WHERE ordernumber = 10103 AND productcode = 'S18_2957'
+SELECT *
+FROM orderdetails
+WHERE ordernumber = 10103 AND productcode = 'S18_2957'
+
+#deleting_1 -
+SELECT *
+FROM customers
+WHERE customername = 'Tokyo Collectables, Ltd'
+DELETE FROM customers
+WHERE customername = 'Tokyo Collectables, Ltd'
+
+# deleting_2 - Find customernumber for Tokyo Collectables, Ltd. - Delete all orders assigned to this company.
+DELETE FROM orders
+WHERE customernumber = 398
+SELECT *
+FROM orders
+WHERE customernumber = 398
+
+# deleting_3 - delete orderdetails
+DELETE FROM orderdetails
+WHERE ordernumber IN (10258, 10339, 10372, 10408)
+SELECT *
+FROM orderdetails
+WHERE ordernumber = 10258
+
+# deleting_4 - payments
+DELETE FROM payments
+WHERE customernumber = 398
